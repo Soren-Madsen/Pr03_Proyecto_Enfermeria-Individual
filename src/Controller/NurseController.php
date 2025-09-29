@@ -8,12 +8,38 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class NurseController extends AbstractController
 {
-    #[Route('/nurse', name: 'app_listado_enfermeros')]
-    public function findByName(): JsonResponse
+    // FindByName function
+    #[Route('/nurse/name/{name}', name: 'app_find_by_name')]
+    public function findByName(string $name): JsonResponse
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/ListadoEnfermerosController.php',
-        ]);
+        // Ruta al archivo nurses.json
+        $jsonFile = $this->getParameter('kernel.project_dir') . '/nurses.json';
+        
+        // Leer y decodificar el archivo JSON
+        $jsonContent = file_get_contents($jsonFile);
+        $nurses = json_decode($jsonContent, true);
+
+
+        // Buscar el enfermero por nombre (Uso del " === " para que busque el nombre exacto)
+        $foundNurse = null;
+        foreach ($nurses as $nurse) {
+            if (isset($nurse['name']) &&
+                strcasecmp($nurse['name'], $name) === 0) {
+                $foundNurse = $nurse;
+                break;
+            }
+        }
+
+        // Devolver resultado
+        if ($foundNurse) {
+            return $this->json([
+                'nurse' => $foundNurse,
+            ]);
+        } else {
+            return $this->json([
+                'error' => 'Enfermero no encontrado',
+                'message' => "No se encontró ningún enfermero con el nombre: {$name}"
+            ], 404);
+        }
     }
 }

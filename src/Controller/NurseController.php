@@ -6,10 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/nurse')]
+
 final class NurseController extends AbstractController
 {
     // FindByName function
-    #[Route('/nurse/name/{name}', methods: ['GET'], name: 'app_find_by_name')]
+    
+    #[Route('/name/{name}', methods: ['GET'], name: 'app_find_by_name')]
     public function findByName(string $name): JsonResponse
     {
         // Ruta al archivo nurses.json
@@ -20,25 +23,29 @@ final class NurseController extends AbstractController
         $nurses = json_decode($jsonContent, true);
 
         // Buscar el enfermero por nombre (Uso del " === " para que busque el nombre exacto)
-        $foundNurse = null;
-        foreach ($nurses as $nurse) {
-            if (isset($nurse['name']) &&
-                strcasecmp($nurse['name'], $name) === 0) {
-                $foundNurse = $nurse;
-                break;
+         $foundNurse = null;
+        if (isset($nurses) && is_array($nurses)) {
+            foreach ($nurses as $nurse) {
+                if ($nurse['name'] === $name) {
+                    $foundNurse = $nurse;
+                }
             }
         }
 
         // Devolver resultado
-        if ($foundNurse) {
+         if ($foundNurse) {
             return $this->json([
                 'nurse' => $foundNurse,
+                'success' => "Nurse {$name} found!"
             ]);
-        } else {
-            return $this->json([
-               'error' => 'Nurse not found',
-                'message' => "Nurse {$name} not found"
-            ], 404);
         }
+        return $this->json(['error' => "Nurse not found!"], 404);
     }
 }
+
+  
+
+       
+
+    
+      

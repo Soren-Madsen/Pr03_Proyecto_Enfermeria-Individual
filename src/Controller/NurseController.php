@@ -15,6 +15,9 @@ final class NurseController extends AbstractController
     #[Route('/name/{name}', methods: ['GET'], name: 'app_find_by_name')]
     public function findByName(string $name): JsonResponse
     {
+        // Debuggear el parámetro recibido
+        dd('Parámetro name recibido:', $name);
+        
         // Ruta al archivo nurses.json
         $jsonFile = $this->getParameter('kernel.project_dir') . '/nurses.json';
         

@@ -18,6 +18,7 @@ final class NurseController extends AbstractController
         // Debuggear el parámetro recibido
         dd('Parámetro name recibido:', $name);
         
+        
         // Ruta al archivo nurses.json
         $jsonFile = $this->getParameter('kernel.project_dir') . '/nurses.json';
         

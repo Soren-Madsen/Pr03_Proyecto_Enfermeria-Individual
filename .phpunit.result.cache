@@ -1,1 +1,1 @@
-{"version":2,"defects":{"App\\Tests\\NurseControllerTest::testFindExistingNurse":8,"App\\Tests\\NurseControllerTest::testFindNonExistingNurse":8},"times":{"App\\Tests\\ExampleTest::testTrueIsTrue":0.005}}
+{"version":2,"defects":{"App\\Tests\\NurseControllerTest::testFindExistingNurse":8,"App\\Tests\\NurseControllerTest::testFindNonExistingNurse":8,"App\\Tests\\ExampleTest::testTrueIsTrue":7},"times":{"App\\Tests\\ExampleTest::testTrueIsTrue":0.008}}

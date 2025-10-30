@@ -24,14 +24,10 @@ jobs:
           extensions: mbstring, intl
           coverage: none
 
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-files-dir)" >> $GITHUB_ENV
-
       - name: Cache composer dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ env.COMPOSER_CACHE_DIR }}
+          path: ~/.composer/cache
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
@@ -39,11 +35,7 @@ jobs:
       - name: Install dependencies
         run: composer install --no-progress --no-suggest --prefer-dist --no-interaction
 
-      - name: Ensure phpunit is available
-        run: |
-          if ! composer show phpunit/phpunit --quiet >/dev/null 2>&1; then
-            composer require --dev phpunit/phpunit:^10 --no-interaction --prefer-dist
-          fi
+  # phpunit should be installed via require-dev in composer.json; no runtime composer require in CI
 
       - name: Run tests
         run: vendor/bin/phpunit --configuration phpunit.xml.dist --no-logging

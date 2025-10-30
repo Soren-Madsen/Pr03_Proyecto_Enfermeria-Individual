@@ -8,6 +8,7 @@ final class ExampleTest extends TestCase
 {
     public function testTrueIsTrue(): void
     {
-        $this->assertTrue(true);
+    // Introduce failure intentionally to simulate CI detecting test failure
+    $this->assertFalse(true, 'Deliberate failing test for CI simulation');
     }
 }

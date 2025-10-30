@@ -9,9 +9,9 @@
         "ext-iconv": "*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
-        "symfony/flex": "^2.8",
+        "symfony/flex": "^2.8.2",
         "symfony/framework-bundle": "7.3.*",
-        "symfony/monolog-bundle": "^3.0",
+        "symfony/monolog-bundle": "^3.10",
         "symfony/runtime": "7.3.*",
         "symfony/yaml": "7.3.*"
     },
@@ -19,7 +19,8 @@
         "symfony/debug-bundle": "7.3.*",
         "symfony/maker-bundle": "^1.64",
         "symfony/stopwatch": "7.3.*",
-        "symfony/web-profiler-bundle": "7.3.*"
+        "symfony/web-profiler-bundle": "7.3.*",
+        "phpunit/phpunit": "^10.5.58"
     },
     "config": {
         "allow-plugins": {
